@@ -10,7 +10,7 @@ from docksmith.store.image import load_manifest
 from docksmith.store.paths import init_dirs, layers_dir
 
 
-@click.command()
+@click.command(context_settings=dict(allow_interspersed_args=False))
 @click.argument("image")
 @click.argument("cmd_args", nargs=-1)
 @click.option("-e", "env_overrides", multiple=True, help="KEY=VALUE")
