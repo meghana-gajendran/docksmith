@@ -1,8 +1,15 @@
-# docksmith/store/paths.py
 import os
 
 def root_dir() -> str:
-    return os.path.join(os.path.expanduser("~"), ".docksmith")
+    # Use SUDO_USER if running under sudo, so state always lives in the
+    # real user's home, not /root/
+    sudo_user = os.environ.get("SUDO_USER")
+    if sudo_user:
+        import pwd
+        home = pwd.getpwnam(sudo_user).pw_dir
+    else:
+        home = os.path.expanduser("~")
+    return os.path.join(home, ".docksmith")
 
 def images_dir() -> str:
     return os.path.join(root_dir(), "images")
