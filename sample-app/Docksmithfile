@@ -1,0 +1,6 @@
+FROM alpine:3.18
+WORKDIR /app
+ENV GREETING=Hello
+COPY . /app
+RUN echo "build complete"
+CMD ["/bin/sh", "-c", "echo $GREETING from Docksmith!"]
